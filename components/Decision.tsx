@@ -6,7 +6,7 @@ type Props = {
 
 const Decision = ({ decision }: Props) => {
   return (
-    <div className="w-full h-[200px] flex flex-col items-center gap-4">
+    <div className="w-full h-[200px] flex flex-col items-center gap-4 pt-[40px]">
       <h1 className="text-[56px] text-white uppercase font-bold">
         {decision ? "you win" : "you lose"}
       </h1>
