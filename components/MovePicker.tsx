@@ -10,47 +10,36 @@ import spock from "../public/assets/001-five-fingers.png";
 import { moves } from "../pages";
 
 type Props = {
-  setChosenMove: (chosen: moves) => void;
+  setChosenMove: (chosen: moves | string) => void;
 };
 
 const MovePicker = ({ setChosenMove }: Props) => {
   return (
-    <div className="relative h-[305px] w-full">
+    <div className="relative h-[305px] w-[400px]">
       <Choice
         move="scissors"
         setChosenMove={setChosenMove}
-        colorAndPosition={
-          "bg-[#EB9F0E] shadow-[#C76C1B] top-0 left-0 right-0 mx-auto"
-        }
-        choice={scissors}
+        position={" top-0 left-0 right-0 mx-auto"}
       />
       <Choice
         move="spock"
         setChosenMove={setChosenMove}
-        colorAndPosition={
-          "bg-[#3FB7CD] shadow-[#2D8DAB] left-[45px] top-[80px]"
-        }
-        choice={spock}
+        position={"left-[45px] top-[80px]"}
       />
       <Choice
         move="paper"
         setChosenMove={setChosenMove}
-        colorAndPosition={
-          "bg-[#4664F4] shadow-[#2A45C2] right-[45px] top-[80px] "
-        }
-        choice={paper}
+        position={"right-[45px] top-[80px] "}
       />
       <Choice
         move="lizard"
         setChosenMove={setChosenMove}
-        colorAndPosition={"bg-[#834EE3] shadow-[#5F37A8] left-[80px] bottom-0"}
-        choice={lizard}
+        position={" left-[80px] bottom-0"}
       />
       <Choice
         move="rock"
         setChosenMove={setChosenMove}
-        colorAndPosition={"bg-[#DB2E4D] shadow-[#9D1634] right-[80px] bottom-0"}
-        choice={rock}
+        position={" right-[80px] bottom-0"}
       />
       <Image
         className="absolute left-0 right-0 mx-auto top-0 bottom-0 my-auto"

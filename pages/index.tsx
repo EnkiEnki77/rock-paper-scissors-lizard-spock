@@ -3,15 +3,16 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Battles from "../components/Battles";
 import MovePicker from "../components/MovePicker";
 import TitleAndScore from "../components/TitleAndScore";
 
 export type moves = null | "rock" | "paper" | "scissors" | "lizard" | "spock";
 
 const Home: NextPage = () => {
-  const [chosenMove, setChosenMove] = useState<moves>(null);
+  const [chosenMove, setChosenMove] = useState<string | null>(null);
 
-  const handleChosenMove = (chosen: moves) => {
+  const handleChosenMove = (chosen: moves | string) => {
     setChosenMove(chosen);
     console.log(chosen);
   };
@@ -27,7 +28,11 @@ const Home: NextPage = () => {
       </Head>
 
       <TitleAndScore score={0} />
-      <MovePicker setChosenMove={handleChosenMove} />
+      {chosenMove === null ? (
+        <MovePicker setChosenMove={handleChosenMove} />
+      ) : (
+        <Battles move={chosenMove} />
+      )}
       <Link className="absolute bottom-[56px]" href="/rules">
         <button className=" text-white uppercase text-base font-semibold h-10 w-[128px] border rounded-[8px] border-white ">
           rules
