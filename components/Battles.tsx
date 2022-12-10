@@ -4,23 +4,10 @@ import Choice from "./Choice";
 
 type Props = {
   move: "rock" | "paper" | "scissors" | "lizard" | "spock" | string;
+  cmpMove: string | null;
 };
 
-const Battles = ({ move }: Props) => {
-  const [cmpMove, setCmpMove] = useState<string | null>(null);
-
-  const moves = ["rock", "paper", "scissors", "lizard", "spock"];
-
-  function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max);
-  }
-
-  const randomCmpMove = moves[getRandomInt(5)];
-
-  useEffect(() => {
-    setCmpMove(randomCmpMove);
-  }, []);
-
+const Battles = ({ move, cmpMove }: Props) => {
   console.log();
   return (
     <div className="flex justify-between w-full">
