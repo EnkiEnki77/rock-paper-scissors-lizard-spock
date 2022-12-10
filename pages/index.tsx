@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import MovePicker from "../components/MovePicker";
 import TitleAndScore from "../components/TitleAndScore";
 
 const Home: NextPage = () => {
@@ -12,7 +13,7 @@ const Home: NextPage = () => {
       </Head>
 
       <TitleAndScore score={0} />
-      {/* <MoveChoice/> */}
+      <MovePicker />
       {/* <button>rules</button> */}
     </div>
   );
