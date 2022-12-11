@@ -13,29 +13,39 @@ export type moves = null | "rock" | "paper" | "scissors" | "lizard" | "spock";
 const Home: NextPage = () => {
   const [chosenMove, setChosenMove] = useState<string | null>(null);
   const [cmpMove, setCmpMove] = useState<string | null>(null);
+  const [score, setScore] = useState<number>(0);
   const moves = ["rock", "paper", "scissors", "lizard", "spock"];
 
-  const rockDecision =
-    cmpMove === "lizard" || cmpMove === "scissors" ? true : false;
-  const paperDecision =
-    cmpMove === "rock" || cmpMove === "spock" ? true : false;
-  const scissorsDecision =
-    cmpMove === "lizard" || cmpMove === "paper" ? true : false;
-  const lizardDecision =
-    cmpMove === "paper" || cmpMove === "spock" ? true : false;
-  const spockDecision =
-    cmpMove === "rock" || cmpMove === "scissors" ? true : false;
+  let rockDecision;
+  let paperDecision;
+  let scissorsDecision;
+  let lizardDecision;
+  let spockDecision;
+  let decision: boolean | undefined;
 
-  const decision =
-    chosenMove === "rock"
-      ? rockDecision
-      : chosenMove === "paper"
-      ? paperDecision
-      : chosenMove === "scissors"
-      ? scissorsDecision
-      : chosenMove === "lizard"
-      ? lizardDecision
-      : spockDecision;
+  if (cmpMove !== null) {
+    rockDecision =
+      cmpMove === "lizard" || cmpMove === "scissors" ? true : false;
+    paperDecision = cmpMove === "rock" || cmpMove === "spock" ? true : false;
+    scissorsDecision =
+      cmpMove === "lizard" || cmpMove === "paper" ? true : false;
+    lizardDecision = cmpMove === "paper" || cmpMove === "spock" ? true : false;
+    spockDecision = cmpMove === "rock" || cmpMove === "scissors" ? true : false;
+  }
+
+  if (chosenMove !== null) {
+    if (chosenMove === "rock") {
+      decision = rockDecision;
+    } else if (chosenMove === "paper") {
+      decision = paperDecision;
+    } else if (chosenMove === "scissors") {
+      decision = scissorsDecision;
+    } else if (chosenMove === "lizard") {
+      decision = lizardDecision;
+    } else if (chosenMove === "spock") {
+      decision = spockDecision;
+    }
+  }
 
   const randomCmpMove = moves[getRandomInt(5)];
 
@@ -43,14 +53,25 @@ const Home: NextPage = () => {
     return Math.floor(Math.random() * max);
   }
 
+  const playAgain = () => {
+    setChosenMove(null);
+    setCmpMove(null);
+  };
+
+  const incrementScore = () => {
+    setScore((prev) => prev + 1);
+  };
+
   const handleChosenMove = (chosen: moves | string) => {
     setChosenMove(chosen);
-    console.log(chosen);
+    setCmpMove(randomCmpMove);
   };
 
   useEffect(() => {
-    setCmpMove(randomCmpMove);
-  }, []);
+    if (cmpMove !== null && decision) {
+      incrementScore();
+    }
+  }, [cmpMove]);
 
   return (
     <div
@@ -62,13 +83,18 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <TitleAndScore score={0} />
+      <TitleAndScore score={score} />
       {chosenMove === null ? (
         <MovePicker setChosenMove={handleChosenMove} />
       ) : (
         [
-          <Battles cmpMove={cmpMove} move={chosenMove} />,
-          <Decision decision={decision} />,
+          <Battles key="battles" cmpMove={cmpMove} move={chosenMove} />,
+          <Decision
+            key="decision"
+            decision={decision}
+            playAgain={playAgain}
+            incrementScore={incrementScore}
+          />,
         ]
       )}
       <Link className="absolute bottom-[56px]" href="/rules">

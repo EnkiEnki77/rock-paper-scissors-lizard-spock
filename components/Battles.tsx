@@ -3,12 +3,11 @@ import { moves } from "../pages";
 import Choice from "./Choice";
 
 type Props = {
-  move: "rock" | "paper" | "scissors" | "lizard" | "spock" | string;
+  move: string;
   cmpMove: string | null;
 };
 
 const Battles = ({ move, cmpMove }: Props) => {
-  console.log();
   return (
     <div className="flex justify-between w-full">
       <div className="flex flex-col w-[143px] h-[182px] justify-end relative">
