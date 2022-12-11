@@ -123,7 +123,7 @@ const Home: NextPage = () => {
     to-[#1F3757] from-[#131537]"
     >
       <Head>
-        <title>Create Next App</title>
+        <title>Rock Paper Scissors Lizard Spock</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
