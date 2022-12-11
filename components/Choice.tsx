@@ -6,14 +6,16 @@ import paper from "../public/assets/paper.png";
 import rock from "../public/assets/003-fist.png";
 import lizard from "../public/assets/lizard.png";
 import spock from "../public/assets/001-five-fingers.png";
+import { motion } from "framer-motion";
 
 type Props = {
   position: string;
   move: moves | string;
   setChosenMove?: (chosen: moves | string) => void;
+  side?: string;
 };
 
-const Choice = ({ position, setChosenMove, move }: Props) => {
+const Choice = ({ position, setChosenMove, move, side }: Props) => {
   const color =
     move === "scissors"
       ? "bg-[#EB9F0E] shadow-[#C76C1B]"
@@ -36,13 +38,29 @@ const Choice = ({ position, setChosenMove, move }: Props) => {
       ? lizard
       : rock;
   return (
-    <div
+    <motion.div
+      initial={{
+        x:
+          setChosenMove === undefined && side === "left"
+            ? 100
+            : setChosenMove === undefined && side === "right"
+            ? -100
+            : 0,
+        opacity: 0,
+      }}
+      animate={{ x: 0, opacity: 1, transition: { duration: 0.5 } }}
+      whileHover={{
+        scale: setChosenMove !== undefined ? 1.1 : 1,
+        transition: { duration: 0.15 },
+      }}
       onClick={() => setChosenMove !== undefined && setChosenMove(move)}
       className={`${
         setChosenMove === undefined
           ? "w-[133px] h-[130px]"
           : "w-[98px] h-[94px]"
-      } z-20 ${color} ${position} shadow-[0px_4px_0px]  rounded-full flex items-center justify-center absolute cursor-pointer`}
+      } z-20 ${color} ${position} shadow-[0px_4px_0px]  rounded-full flex items-center justify-center absolute ${
+        setChosenMove !== undefined && "cursor-pointer"
+      }`}
     >
       <div
         className={`${
@@ -55,7 +73,7 @@ const Choice = ({ position, setChosenMove, move }: Props) => {
           <Image src={img} alt={move !== null ? move : ""} />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

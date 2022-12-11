@@ -7,6 +7,7 @@ import Battles from "../components/Battles";
 import Decision from "../components/Decision";
 import MovePicker from "../components/MovePicker";
 import TitleAndScore from "../components/TitleAndScore";
+import { motion } from "framer-motion";
 
 export type moves = null | "rock" | "paper" | "scissors" | "lizard" | "spock";
 
@@ -148,9 +149,14 @@ const Home: NextPage = () => {
         className="absolute bottom-[56px] md:bottom-8 md:right-8"
         href="/rules"
       >
-        <button className=" text-white uppercase text-base font-semibold h-10 w-[128px] border rounded-[8px] border-white ">
+        <motion.button
+          initial={{ x: -300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className=" text-white uppercase text-base font-semibold h-10 w-[128px] border rounded-[8px] border-white "
+        >
           rules
-        </button>
+        </motion.button>
       </Link>
     </div>
   );

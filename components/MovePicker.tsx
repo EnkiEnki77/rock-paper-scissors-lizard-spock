@@ -8,6 +8,7 @@ import rock from "../public/assets/003-fist.png";
 import lizard from "../public/assets/lizard.png";
 import spock from "../public/assets/001-five-fingers.png";
 import { moves } from "../pages";
+import { motion } from "framer-motion";
 
 type Props = {
   setChosenMove: (chosen: moves | string) => void;
@@ -15,7 +16,12 @@ type Props = {
 
 const MovePicker = ({ setChosenMove }: Props) => {
   return (
-    <div className="relative h-[305px] w-[400px]">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="relative h-[305px] w-[400px]"
+    >
       <Choice
         move="scissors"
         setChosenMove={setChosenMove}
@@ -46,7 +52,7 @@ const MovePicker = ({ setChosenMove }: Props) => {
         src={polygon}
         alt=""
       />
-    </div>
+    </motion.div>
   );
 };
 
