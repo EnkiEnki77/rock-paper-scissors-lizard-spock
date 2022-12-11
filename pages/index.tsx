@@ -22,6 +22,49 @@ const Home: NextPage = () => {
   let lizardDecision;
   let spockDecision;
   let decision: boolean | undefined;
+  let decisionExplanation;
+
+  const scissorsVsPaper = "Scissors cuts paper";
+  const paperVsRock = "paper covers rock";
+  const rockVsLizard = "rock crushes lizard";
+  const lizardVsSpock = "lizard poisons spock";
+  const spockVsScissors = "spock smashes scissors";
+  const scissorsVsLizard = "scissors decapitates lizard";
+  const lizardVsPaper = "lizard eats paper";
+  const paperVsSpock = "paper disproves spock";
+  const spockVsRock = "spock vaporizes rock";
+  const rockVsScissors = "rock crushes scissors";
+
+  (chosenMove === "scissors" && cmpMove === "paper") ||
+  (chosenMove === "paper" && cmpMove === "scissors")
+    ? (decisionExplanation = scissorsVsPaper)
+    : (chosenMove === "paper" && cmpMove === "rock") ||
+      (chosenMove === "rock" && cmpMove === "paper")
+    ? (decisionExplanation = paperVsRock)
+    : (chosenMove === "rock" && cmpMove === "lizard") ||
+      (chosenMove === "lizard" && cmpMove === "rock")
+    ? (decisionExplanation = rockVsLizard)
+    : (chosenMove === "lizard" && cmpMove === "spock") ||
+      (chosenMove === "spock" && cmpMove === "lizard")
+    ? (decisionExplanation = lizardVsSpock)
+    : (chosenMove === "spock" && cmpMove === "scissors") ||
+      (chosenMove === "scissors" && cmpMove === "spock")
+    ? (decisionExplanation = spockVsScissors)
+    : (chosenMove === "scissors" && cmpMove === "lizard") ||
+      (chosenMove === "lizard" && cmpMove === "scissors")
+    ? (decisionExplanation = scissorsVsLizard)
+    : (chosenMove === "lizard" && cmpMove === "paper") ||
+      (chosenMove === "paper" && cmpMove === "lizard")
+    ? (decisionExplanation = lizardVsPaper)
+    : (chosenMove === "paper" && cmpMove === "spock") ||
+      (chosenMove === "spock" && cmpMove === "paper")
+    ? (decisionExplanation = paperVsSpock)
+    : (chosenMove === "spock" && cmpMove === "rock") ||
+      (chosenMove === "rock" && cmpMove === "spock")
+    ? (decisionExplanation = spockVsRock)
+    : chosenMove === cmpMove
+    ? (decisionExplanation = "tied")
+    : (decisionExplanation = rockVsScissors);
 
   if (cmpMove !== null) {
     rockDecision =
@@ -83,7 +126,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <TitleAndScore score={score} />
+      <TitleAndScore
+        score={score}
+        decisionExplanation={decisionExplanation}
+        chosenMove={chosenMove}
+      />
       {chosenMove === null ? (
         <MovePicker setChosenMove={handleChosenMove} />
       ) : (
