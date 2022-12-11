@@ -9,7 +9,7 @@ type Props = {
 
 const Battles = ({ move, cmpMove }: Props) => {
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex justify-between w-full md:max-w-[700px]">
       <div className="flex flex-col w-[143px] h-[182px] justify-end relative">
         <Choice move={move} position="top-0 left-0 right-0 mx-auto" />
         <p className="uppercase text-[15px] text-white font-bold text-center">

@@ -42,7 +42,7 @@ const Choice = ({ position, setChosenMove, move }: Props) => {
         setChosenMove === undefined
           ? "w-[133px] h-[130px]"
           : "w-[98px] h-[94px]"
-      } z-20 ${color} ${position} shadow-[0px_4px_0px]  rounded-full flex items-center justify-center absolute`}
+      } z-20 ${color} ${position} shadow-[0px_4px_0px]  rounded-full flex items-center justify-center absolute cursor-pointer`}
     >
       <div
         className={`${

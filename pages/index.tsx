@@ -97,7 +97,10 @@ const Home: NextPage = () => {
           />,
         ]
       )}
-      <Link className="absolute bottom-[56px]" href="/rules">
+      <Link
+        className="absolute bottom-[56px] md:bottom-8 md:right-8"
+        href="/rules"
+      >
         <button className=" text-white uppercase text-base font-semibold h-10 w-[128px] border rounded-[8px] border-white ">
           rules
         </button>
